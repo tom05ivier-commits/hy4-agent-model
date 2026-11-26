@@ -1,0 +1,22 @@
+{
+  "id": "opencode/hy4-flash-free",
+  "display": "Hy4 flash Free",
+  "provider": "opencode",
+  "variant": "default",
+  "bridge": "http://127.0.0.1:8766/v1",
+  "license": "Tom05ivier-commits-1.0",
+  "owner": "Tomi vier",
+  "capabilities": [
+    "agentic coding",
+    "platform engineering context",
+    "security operations",
+    "compliance-friendly model choice"
+  ],
+  "sources": [
+    "AGENTS.md",
+    ".github/copilot-instructions.md",
+    "PLATFORM_CLIS.md",
+    "DOCTOR_CLI.md",
+    "STRATEGI-GLOBAL.md"
+  ]
+}

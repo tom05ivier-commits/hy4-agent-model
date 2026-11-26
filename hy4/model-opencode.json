@@ -1,0 +1,1917 @@
+{
+  "mcp": {
+    "filesystem": {
+      "type": "local",
+      "command": [
+        "mcp-server-filesystem",
+        "/root/workspace"
+      ],
+      "enabled": true
+    },
+    "sequential-thinking": {
+      "type": "local",
+      "command": [
+        "mcp-server-sequential-thinking"
+      ],
+      "enabled": true
+    },
+    "playwright": {
+      "type": "local",
+      "command": [
+        "playwright-mcp",
+        "--headless",
+        "--no-sandbox",
+        "--browser",
+        "chromium",
+        "--config",
+        "/usr/share/opencode/playwright-mcp.json"
+      ],
+      "enabled": true
+    },
+    "servers": {
+      "new-mcp-server": {
+        "type": "remote",
+        "url": "https://api.githubcopilot.com/mcp/",
+        "headers": {
+          "Authorization": "Bearer {file:~/.config/opencode/mcp_github_token.txt}"
+        },
+        "oauth": false,
+        "disabled": false
+      },
+      "memory": {
+        "type": "local",
+        "command": [
+          "mcp-server-memory"
+        ],
+        "disabled": false
+      },
+      "everything": {
+        "type": "local",
+        "command": [
+          "mcp-server-everything"
+        ],
+        "disabled": false
+      },
+      "github": {
+        "type": "local",
+        "command": [
+          "mcp-server-github"
+        ],
+        "disabled": false,
+        "protocol": "auto"
+      },
+      "bigquery": {
+        "type": "remote",
+        "url": "https://bigquery.googleapis.com/mcp",
+        "headers": {
+          "Authorization": "Bearer {file:~/.config/opencode/bigquery_token.txt}",
+          "accept": "application/json, text/event-stream"
+        },
+        "oauth": false,
+        "disabled": true
+      }
+    }
+  },
+  "plugins": [
+    "@openchamber/opencode-claude@1.7.0",
+    {
+      "package": "/root/.config/opencode/plugins/device-control",
+      "options": {}
+    }
+  ],
+  "permissions": [
+    {
+      "action": "webfetch",
+      "resource": "*",
+      "effect": "allow"
+    },
+    {
+      "action": "websearch",
+      "resource": "*",
+      "effect": "allow"
+    },
+    {
+      "action": "edit",
+      "resource": "*",
+      "effect": "allow"
+    },
+    {
+      "action": "edit",
+      "resource": "*.json",
+      "effect": "ask"
+    },
+    {
+      "action": "edit",
+      "resource": "*.jsonc",
+      "effect": "ask"
+    },
+    {
+      "action": "edit",
+      "resource": "*.toml",
+      "effect": "ask"
+    },
+    {
+      "action": "edit",
+      "resource": "/root/.config/opencode/opencode.*",
+      "effect": "ask"
+    },
+    {
+      "action": "device",
+      "resource": "*",
+      "effect": "allow"
+    },
+    {
+      "action": "shell",
+      "resource": "*",
+      "effect": "allow"
+    },
+    {
+      "action": "shell",
+      "resource": "python3 /root/.config/opencode/skills/android-device/android_device.py *",
+      "effect": "allow"
+    },
+    {
+      "action": "shell",
+      "resource": "opencode api *",
+      "effect": "allow"
+    },
+    {
+      "action": "webfetch",
+      "resource": "https://opencode.ai/v2/openapi.json",
+      "effect": "allow"
+    },
+    {
+      "action": "webfetch",
+      "resource": "https://opencode.ai/docs/openapi.json",
+      "effect": "allow"
+    },
+    {
+      "action": "webfetch",
+      "resource": "http://localhost:*",
+      "effect": "allow"
+    },
+    {
+      "action": "webfetch",
+      "resource": "http://127.0.0.1:*",
+      "effect": "allow"
+    },
+    {
+      "action": "read",
+      "resource": "/root/infinity/docs/opencode-openapi-v2.json",
+      "effect": "allow"
+    },
+    {
+      "action": "shell",
+      "resource": "openssl req *",
+      "effect": "allow"
+    },
+    {
+      "action": "shell",
+      "resource": "openssl x509 *",
+      "effect": "allow"
+    },
+    {
+      "action": "shell",
+      "resource": "git push *",
+      "effect": "allow"
+    },
+    {
+      "action": "shell",
+      "resource": "git fetch *",
+      "effect": "allow"
+    },
+    {
+      "action": "shell",
+      "resource": "gh auth login *",
+      "effect": "allow"
+    },
+    {
+      "action": "shell",
+      "resource": "gh repo *",
+      "effect": "allow"
+    },
+    {
+      "action": "webfetch",
+      "resource": "http://127.0.0.1:*",
+      "effect": "deny"
+    },
+    {
+      "action": "webfetch",
+      "resource": "http://127.0.0.1:8785/*",
+      "effect": "allow"
+    },
+    {
+      "action": "webfetch",
+      "resource": "https://127.0.0.1:*",
+      "effect": "deny"
+    }
+  ],
+  "websearch": {
+    "provider": "random"
+  },
+  "model": "opencode/hy4-flash-free",
+  "$schema": "https://opencode.ai/config.json",
+  "providers": {
+    "tom05": {
+      "name": "Tom05",
+      "package": "@opencode/ai/providers/openai-compatible",
+      "settings": {
+        "baseURL": "http://127.0.0.1:8772/v1"
+      },
+      "models": {
+        "tom05-flash-free": {
+          "name": "Tom05 flash Free",
+          "modelID": "hy4-flash-free",
+          "cost": [
+            {
+              "input": 0,
+              "output": 0,
+              "cache": {
+                "read": 0,
+                "write": 0
+              }
+            }
+          ],
+          "limit": {
+            "context": 100000000,
+            "input": 100000000
+          }
+        },
+        "claude-code/claude-fable-5-2": {
+          "name": "claude-code/claude-fable-5-2",
+          "modelID": "claude-code/claude-fable-5-2",
+          "cost": [
+            {
+              "input": 0,
+              "output": 0,
+              "cache": {
+                "read": 0,
+                "write": 0
+              }
+            }
+          ],
+          "limit": {
+            "context": 100000000,
+            "input": 100000000
+          }
+        },
+        "claude-code/claude-fable-5-2:fast": {
+          "name": "claude-code/claude-fable-5-2:fast",
+          "modelID": "claude-code/claude-fable-5-2:fast",
+          "cost": [
+            {
+              "input": 0,
+              "output": 0,
+              "cache": {
+                "read": 0,
+                "write": 0
+              }
+            }
+          ],
+          "limit": {
+            "context": 100000000,
+            "input": 100000000
+          }
+        },
+        "claude-code/claude-haiku-5-5": {
+          "name": "claude-code/claude-haiku-5-5",
+          "modelID": "claude-code/claude-haiku-5-5",
+          "cost": [
+            {
+              "input": 0,
+              "output": 0,
+              "cache": {
+                "read": 0,
+                "write": 0
+              }
+            }
+          ],
+          "limit": {
+            "context": 100000000,
+            "input": 100000000
+          }
+        },
+        "claude-code/claude-opus-5-5": {
+          "name": "claude-code/claude-opus-5-5",
+          "modelID": "claude-code/claude-opus-5-5",
+          "cost": [
+            {
+              "input": 0,
+              "output": 0,
+              "cache": {
+                "read": 0,
+                "write": 0
+              }
+            }
+          ],
+          "limit": {
+            "context": 100000000,
+            "input": 100000000
+          }
+        },
+        "claude-code/claude-opus-5-5:fast": {
+          "name": "claude-code/claude-opus-5-5:fast",
+          "modelID": "claude-code/claude-opus-5-5:fast",
+          "cost": [
+            {
+              "input": 0,
+              "output": 0,
+              "cache": {
+                "read": 0,
+                "write": 0
+              }
+            }
+          ],
+          "limit": {
+            "context": 100000000,
+            "input": 100000000
+          }
+        },
+        "claude-code/claude-sonnet-5-5": {
+          "name": "claude-code/claude-sonnet-5-5",
+          "modelID": "claude-code/claude-sonnet-5-5",
+          "cost": [
+            {
+              "input": 0,
+              "output": 0,
+              "cache": {
+                "read": 0,
+                "write": 0
+              }
+            }
+          ],
+          "limit": {
+            "context": 100000000,
+            "input": 100000000
+          }
+        },
+        "console-meta/muse-ember-1.0": {
+          "name": "console-meta/muse-ember-1.0",
+          "modelID": "console-meta/muse-ember-1.0",
+          "cost": [
+            {
+              "input": 0,
+              "output": 0,
+              "cache": {
+                "read": 0,
+                "write": 0
+              }
+            }
+          ],
+          "limit": {
+            "context": 100000000,
+            "input": 100000000
+          }
+        },
+        "console-meta/muse-spark-1.1": {
+          "name": "console-meta/muse-spark-1.1",
+          "modelID": "console-meta/muse-spark-1.1",
+          "cost": [
+            {
+              "input": 0,
+              "output": 0,
+              "cache": {
+                "read": 0,
+                "write": 0
+              }
+            }
+          ],
+          "limit": {
+            "context": 100000000,
+            "input": 100000000
+          }
+        },
+        "console-meta/muse-spark-1.2": {
+          "name": "console-meta/muse-spark-1.2",
+          "modelID": "console-meta/muse-spark-1.2",
+          "cost": [
+            {
+              "input": 0,
+              "output": 0,
+              "cache": {
+                "read": 0,
+                "write": 0
+              }
+            }
+          ],
+          "limit": {
+            "context": 100000000,
+            "input": 100000000
+          }
+        },
+        "console-meta/muse-spark-1.2-contributor": {
+          "name": "console-meta/muse-spark-1.2-contributor",
+          "modelID": "console-meta/muse-spark-1.2-contributor",
+          "cost": [
+            {
+              "input": 0,
+              "output": 0,
+              "cache": {
+                "read": 0,
+                "write": 0
+              }
+            }
+          ],
+          "limit": {
+            "context": 100000000,
+            "input": 100000000
+          }
+        },
+        "console-meta/muse-spark-1.3": {
+          "name": "console-meta/muse-spark-1.3",
+          "modelID": "console-meta/muse-spark-1.3",
+          "cost": [
+            {
+              "input": 0,
+              "output": 0,
+              "cache": {
+                "read": 0,
+                "write": 0
+              }
+            }
+          ],
+          "limit": {
+            "context": 100000000,
+            "input": 100000000
+          }
+        },
+        "console-meta/muse-spark-1.3-contributor": {
+          "name": "console-meta/muse-spark-1.3-contributor",
+          "modelID": "console-meta/muse-spark-1.3-contributor",
+          "cost": [
+            {
+              "input": 0,
+              "output": 0,
+              "cache": {
+                "read": 0,
+                "write": 0
+              }
+            }
+          ],
+          "limit": {
+            "context": 100000000,
+            "input": 100000000
+          }
+        },
+        "console-meta/muse-wonder-1.0": {
+          "name": "console-meta/muse-wonder-1.0",
+          "modelID": "console-meta/muse-wonder-1.0",
+          "cost": [
+            {
+              "input": 0,
+              "output": 0,
+              "cache": {
+                "read": 0,
+                "write": 0
+              }
+            }
+          ],
+          "limit": {
+            "context": 100000000,
+            "input": 100000000
+          }
+        },
+        "opencode-go/beam-free": {
+          "name": "opencode-go/beam-free",
+          "modelID": "opencode-go/beam-free",
+          "cost": [
+            {
+              "input": 0,
+              "output": 0,
+              "cache": {
+                "read": 0,
+                "write": 0
+              }
+            }
+          ],
+          "limit": {
+            "context": 100000000,
+            "input": 100000000
+          }
+        },
+        "opencode-go/claude-haiku-5-5": {
+          "name": "opencode-go/claude-haiku-5-5",
+          "modelID": "opencode-go/claude-haiku-5-5",
+          "cost": [
+            {
+              "input": 0,
+              "output": 0,
+              "cache": {
+                "read": 0,
+                "write": 0
+              }
+            }
+          ],
+          "limit": {
+            "context": 100000000,
+            "input": 100000000
+          }
+        },
+        "opencode-go/deepseek-v4-pro": {
+          "name": "opencode-go/deepseek-v4-pro",
+          "modelID": "opencode-go/deepseek-v4-pro",
+          "cost": [
+            {
+              "input": 0,
+              "output": 0,
+              "cache": {
+                "read": 0,
+                "write": 0
+              }
+            }
+          ],
+          "limit": {
+            "context": 100000000,
+            "input": 100000000
+          }
+        },
+        "opencode-go/deepseek-v4.1-flash": {
+          "name": "opencode-go/deepseek-v4.1-flash",
+          "modelID": "opencode-go/deepseek-v4.1-flash",
+          "cost": [
+            {
+              "input": 0,
+              "output": 0,
+              "cache": {
+                "read": 0,
+                "write": 0
+              }
+            }
+          ],
+          "limit": {
+            "context": 100000000,
+            "input": 100000000
+          }
+        },
+        "opencode-go/gemini-4-argon": {
+          "name": "opencode-go/gemini-4-argon",
+          "modelID": "opencode-go/gemini-4-argon",
+          "cost": [
+            {
+              "input": 0,
+              "output": 0,
+              "cache": {
+                "read": 0,
+                "write": 0
+              }
+            }
+          ],
+          "limit": {
+            "context": 100000000,
+            "input": 100000000
+          }
+        },
+        "opencode-go/glm-5.3": {
+          "name": "opencode-go/glm-5.3",
+          "modelID": "opencode-go/glm-5.3",
+          "cost": [
+            {
+              "input": 0,
+              "output": 0,
+              "cache": {
+                "read": 0,
+                "write": 0
+              }
+            }
+          ],
+          "limit": {
+            "context": 100000000,
+            "input": 100000000
+          }
+        },
+        "opencode-go/glm-5.3-flash": {
+          "name": "opencode-go/glm-5.3-flash",
+          "modelID": "opencode-go/glm-5.3-flash",
+          "cost": [
+            {
+              "input": 0,
+              "output": 0,
+              "cache": {
+                "read": 0,
+                "write": 0
+              }
+            }
+          ],
+          "limit": {
+            "context": 100000000,
+            "input": 100000000
+          }
+        },
+        "opencode-go/gpt-5.6-luna": {
+          "name": "opencode-go/gpt-5.6-luna",
+          "modelID": "opencode-go/gpt-5.6-luna",
+          "cost": [
+            {
+              "input": 0,
+              "output": 0,
+              "cache": {
+                "read": 0,
+                "write": 0
+              }
+            }
+          ],
+          "limit": {
+            "context": 100000000,
+            "input": 100000000
+          }
+        },
+        "opencode-go/gpt-6-luna": {
+          "name": "opencode-go/gpt-6-luna",
+          "modelID": "opencode-go/gpt-6-luna",
+          "cost": [
+            {
+              "input": 0,
+              "output": 0,
+              "cache": {
+                "read": 0,
+                "write": 0
+              }
+            }
+          ],
+          "limit": {
+            "context": 100000000,
+            "input": 100000000
+          }
+        },
+        "opencode-go/grok-4.7": {
+          "name": "opencode-go/grok-4.7",
+          "modelID": "opencode-go/grok-4.7",
+          "cost": [
+            {
+              "input": 0,
+              "output": 0,
+              "cache": {
+                "read": 0,
+                "write": 0
+              }
+            }
+          ],
+          "limit": {
+            "context": 100000000,
+            "input": 100000000
+          }
+        },
+        "opencode-go/hy3": {
+          "name": "opencode-go/hy3",
+          "modelID": "opencode-go/hy3",
+          "cost": [
+            {
+              "input": 0,
+              "output": 0,
+              "cache": {
+                "read": 0,
+                "write": 0
+              }
+            }
+          ],
+          "limit": {
+            "context": 100000000,
+            "input": 100000000
+          }
+        },
+        "opencode-go/hy4": {
+          "name": "opencode-go/hy4",
+          "modelID": "opencode-go/hy4",
+          "cost": [
+            {
+              "input": 0,
+              "output": 0,
+              "cache": {
+                "read": 0,
+                "write": 0
+              }
+            }
+          ],
+          "limit": {
+            "context": 100000000,
+            "input": 100000000
+          }
+        },
+        "opencode-go/hy4-flash-free": {
+          "name": "opencode-go/hy4-flash-free",
+          "modelID": "opencode-go/hy4-flash-free",
+          "cost": [
+            {
+              "input": 0,
+              "output": 0,
+              "cache": {
+                "read": 0,
+                "write": 0
+              }
+            }
+          ],
+          "limit": {
+            "context": 100000000,
+            "input": 100000000
+          }
+        },
+        "opencode-go/hy4-preview": {
+          "name": "opencode-go/hy4-preview",
+          "modelID": "opencode-go/hy4-preview",
+          "cost": [
+            {
+              "input": 0,
+              "output": 0,
+              "cache": {
+                "read": 0,
+                "write": 0
+              }
+            }
+          ],
+          "limit": {
+            "context": 100000000,
+            "input": 100000000
+          }
+        },
+        "opencode-go/iceman-contributor-free": {
+          "name": "opencode-go/iceman-contributor-free",
+          "modelID": "opencode-go/iceman-contributor-free",
+          "cost": [
+            {
+              "input": 0,
+              "output": 0,
+              "cache": {
+                "read": 0,
+                "write": 0
+              }
+            }
+          ],
+          "limit": {
+            "context": 100000000,
+            "input": 100000000
+          }
+        },
+        "opencode-go/kimi-k2.7-code": {
+          "name": "opencode-go/kimi-k2.7-code",
+          "modelID": "opencode-go/kimi-k2.7-code",
+          "cost": [
+            {
+              "input": 0,
+              "output": 0,
+              "cache": {
+                "read": 0,
+                "write": 0
+              }
+            }
+          ],
+          "limit": {
+            "context": 100000000,
+            "input": 100000000
+          }
+        },
+        "opencode-go/kimi-k3": {
+          "name": "opencode-go/kimi-k3",
+          "modelID": "opencode-go/kimi-k3",
+          "cost": [
+            {
+              "input": 0,
+              "output": 0,
+              "cache": {
+                "read": 0,
+                "write": 0
+              }
+            }
+          ],
+          "limit": {
+            "context": 100000000,
+            "input": 100000000
+          }
+        },
+        "opencode-go/kimi-k3.1-pro": {
+          "name": "opencode-go/kimi-k3.1-pro",
+          "modelID": "opencode-go/kimi-k3.1-pro",
+          "cost": [
+            {
+              "input": 0,
+              "output": 0,
+              "cache": {
+                "read": 0,
+                "write": 0
+              }
+            }
+          ],
+          "limit": {
+            "context": 100000000,
+            "input": 100000000
+          }
+        },
+        "opencode-go/longcat-2.0": {
+          "name": "opencode-go/longcat-2.0",
+          "modelID": "opencode-go/longcat-2.0",
+          "cost": [
+            {
+              "input": 0,
+              "output": 0,
+              "cache": {
+                "read": 0,
+                "write": 0
+              }
+            }
+          ],
+          "limit": {
+            "context": 100000000,
+            "input": 100000000
+          }
+        },
+        "opencode-go/longcat-2.5-free": {
+          "name": "opencode-go/longcat-2.5-free",
+          "modelID": "opencode-go/longcat-2.5-free",
+          "cost": [
+            {
+              "input": 0,
+              "output": 0,
+              "cache": {
+                "read": 0,
+                "write": 0
+              }
+            }
+          ],
+          "limit": {
+            "context": 100000000,
+            "input": 100000000
+          }
+        },
+        "opencode-go/mimo-v2.5": {
+          "name": "opencode-go/mimo-v2.5",
+          "modelID": "opencode-go/mimo-v2.5",
+          "cost": [
+            {
+              "input": 0,
+              "output": 0,
+              "cache": {
+                "read": 0,
+                "write": 0
+              }
+            }
+          ],
+          "limit": {
+            "context": 100000000,
+            "input": 100000000
+          }
+        },
+        "opencode-go/mimo-v2.5-pro": {
+          "name": "opencode-go/mimo-v2.5-pro",
+          "modelID": "opencode-go/mimo-v2.5-pro",
+          "cost": [
+            {
+              "input": 0,
+              "output": 0,
+              "cache": {
+                "read": 0,
+                "write": 0
+              }
+            }
+          ],
+          "limit": {
+            "context": 100000000,
+            "input": 100000000
+          }
+        },
+        "opencode-go/mimo-v2.6-flash": {
+          "name": "opencode-go/mimo-v2.6-flash",
+          "modelID": "opencode-go/mimo-v2.6-flash",
+          "cost": [
+            {
+              "input": 0,
+              "output": 0,
+              "cache": {
+                "read": 0,
+                "write": 0
+              }
+            }
+          ],
+          "limit": {
+            "context": 100000000,
+            "input": 100000000
+          }
+        },
+        "opencode-go/mimo-v2.6-pro": {
+          "name": "opencode-go/mimo-v2.6-pro",
+          "modelID": "opencode-go/mimo-v2.6-pro",
+          "cost": [
+            {
+              "input": 0,
+              "output": 0,
+              "cache": {
+                "read": 0,
+                "write": 0
+              }
+            }
+          ],
+          "limit": {
+            "context": 100000000,
+            "input": 100000000
+          }
+        },
+        "opencode-go/minimax-m3": {
+          "name": "opencode-go/minimax-m3",
+          "modelID": "opencode-go/minimax-m3",
+          "cost": [
+            {
+              "input": 0,
+              "output": 0,
+              "cache": {
+                "read": 0,
+                "write": 0
+              }
+            }
+          ],
+          "limit": {
+            "context": 100000000,
+            "input": 100000000
+          }
+        },
+        "opencode-go/minimax-m3.1-flash": {
+          "name": "opencode-go/minimax-m3.1-flash",
+          "modelID": "opencode-go/minimax-m3.1-flash",
+          "cost": [
+            {
+              "input": 0,
+              "output": 0,
+              "cache": {
+                "read": 0,
+                "write": 0
+              }
+            }
+          ],
+          "limit": {
+            "context": 100000000,
+            "input": 100000000
+          }
+        },
+        "opencode-go/muse-spark-1.2-contributor": {
+          "name": "opencode-go/muse-spark-1.2-contributor",
+          "modelID": "opencode-go/muse-spark-1.2-contributor",
+          "cost": [
+            {
+              "input": 0,
+              "output": 0,
+              "cache": {
+                "read": 0,
+                "write": 0
+              }
+            }
+          ],
+          "limit": {
+            "context": 100000000,
+            "input": 100000000
+          }
+        },
+        "opencode-go/muse-spark-1.3-contributor": {
+          "name": "opencode-go/muse-spark-1.3-contributor",
+          "modelID": "opencode-go/muse-spark-1.3-contributor",
+          "cost": [
+            {
+              "input": 0,
+              "output": 0,
+              "cache": {
+                "read": 0,
+                "write": 0
+              }
+            }
+          ],
+          "limit": {
+            "context": 100000000,
+            "input": 100000000
+          }
+        },
+        "opencode-go/qwen3.7-plus": {
+          "name": "opencode-go/qwen3.7-plus",
+          "modelID": "opencode-go/qwen3.7-plus",
+          "cost": [
+            {
+              "input": 0,
+              "output": 0,
+              "cache": {
+                "read": 0,
+                "write": 0
+              }
+            }
+          ],
+          "limit": {
+            "context": 100000000,
+            "input": 100000000
+          }
+        },
+        "opencode-go/qwen3.8-flash": {
+          "name": "opencode-go/qwen3.8-flash",
+          "modelID": "opencode-go/qwen3.8-flash",
+          "cost": [
+            {
+              "input": 0,
+              "output": 0,
+              "cache": {
+                "read": 0,
+                "write": 0
+              }
+            }
+          ],
+          "limit": {
+            "context": 100000000,
+            "input": 100000000
+          }
+        },
+        "opencode-go/qwen3.8-max": {
+          "name": "opencode-go/qwen3.8-max",
+          "modelID": "opencode-go/qwen3.8-max",
+          "cost": [
+            {
+              "input": 0,
+              "output": 0,
+              "cache": {
+                "read": 0,
+                "write": 0
+              }
+            }
+          ],
+          "limit": {
+            "context": 100000000,
+            "input": 100000000
+          }
+        },
+        "opencode-go/qwen4-max": {
+          "name": "opencode-go/qwen4-max",
+          "modelID": "opencode-go/qwen4-max",
+          "cost": [
+            {
+              "input": 0,
+              "output": 0,
+              "cache": {
+                "read": 0,
+                "write": 0
+              }
+            }
+          ],
+          "limit": {
+            "context": 100000000,
+            "input": 100000000
+          }
+        },
+        "opencode-go/step-5-preview": {
+          "name": "opencode-go/step-5-preview",
+          "modelID": "opencode-go/step-5-preview",
+          "cost": [
+            {
+              "input": 0,
+              "output": 0,
+              "cache": {
+                "read": 0,
+                "write": 0
+              }
+            }
+          ],
+          "limit": {
+            "context": 100000000,
+            "input": 100000000
+          }
+        },
+        "opencode/beam-free": {
+          "name": "opencode/beam-free",
+          "modelID": "opencode/beam-free",
+          "cost": [
+            {
+              "input": 0,
+              "output": 0,
+              "cache": {
+                "read": 0,
+                "write": 0
+              }
+            }
+          ],
+          "limit": {
+            "context": 100000000,
+            "input": 100000000
+          }
+        },
+        "opencode/big-pickle": {
+          "name": "opencode/big-pickle",
+          "modelID": "opencode/big-pickle",
+          "cost": [
+            {
+              "input": 0,
+              "output": 0,
+              "cache": {
+                "read": 0,
+                "write": 0
+              }
+            }
+          ],
+          "limit": {
+            "context": 100000000,
+            "input": 100000000
+          }
+        },
+        "opencode/claude-fable-5-1": {
+          "name": "opencode/claude-fable-5-1",
+          "modelID": "opencode/claude-fable-5-1",
+          "cost": [
+            {
+              "input": 0,
+              "output": 0,
+              "cache": {
+                "read": 0,
+                "write": 0
+              }
+            }
+          ],
+          "limit": {
+            "context": 100000000,
+            "input": 100000000
+          }
+        },
+        "opencode/claude-fable-5-2": {
+          "name": "opencode/claude-fable-5-2",
+          "modelID": "opencode/claude-fable-5-2",
+          "cost": [
+            {
+              "input": 0,
+              "output": 0,
+              "cache": {
+                "read": 0,
+                "write": 0
+              }
+            }
+          ],
+          "limit": {
+            "context": 100000000,
+            "input": 100000000
+          }
+        },
+        "opencode/claude-haiku-5-5": {
+          "name": "opencode/claude-haiku-5-5",
+          "modelID": "opencode/claude-haiku-5-5",
+          "cost": [
+            {
+              "input": 0,
+              "output": 0,
+              "cache": {
+                "read": 0,
+                "write": 0
+              }
+            }
+          ],
+          "limit": {
+            "context": 100000000,
+            "input": 100000000
+          }
+        },
+        "opencode/claude-opus-5-5": {
+          "name": "opencode/claude-opus-5-5",
+          "modelID": "opencode/claude-opus-5-5",
+          "cost": [
+            {
+              "input": 0,
+              "output": 0,
+              "cache": {
+                "read": 0,
+                "write": 0
+              }
+            }
+          ],
+          "limit": {
+            "context": 100000000,
+            "input": 100000000
+          }
+        },
+        "opencode/claude-sonnet-5-5": {
+          "name": "opencode/claude-sonnet-5-5",
+          "modelID": "opencode/claude-sonnet-5-5",
+          "cost": [
+            {
+              "input": 0,
+              "output": 0,
+              "cache": {
+                "read": 0,
+                "write": 0
+              }
+            }
+          ],
+          "limit": {
+            "context": 100000000,
+            "input": 100000000
+          }
+        },
+        "opencode/deepseek-v4-pro": {
+          "name": "opencode/deepseek-v4-pro",
+          "modelID": "opencode/deepseek-v4-pro",
+          "cost": [
+            {
+              "input": 0,
+              "output": 0,
+              "cache": {
+                "read": 0,
+                "write": 0
+              }
+            }
+          ],
+          "limit": {
+            "context": 100000000,
+            "input": 100000000
+          }
+        },
+        "opencode/deepseek-v4.1-flash": {
+          "name": "opencode/deepseek-v4.1-flash",
+          "modelID": "opencode/deepseek-v4.1-flash",
+          "cost": [
+            {
+              "input": 0,
+              "output": 0,
+              "cache": {
+                "read": 0,
+                "write": 0
+              }
+            }
+          ],
+          "limit": {
+            "context": 100000000,
+            "input": 100000000
+          }
+        },
+        "opencode/deepseek-v4.1-flash-free": {
+          "name": "opencode/deepseek-v4.1-flash-free",
+          "modelID": "opencode/deepseek-v4.1-flash-free",
+          "cost": [
+            {
+              "input": 0,
+              "output": 0,
+              "cache": {
+                "read": 0,
+                "write": 0
+              }
+            }
+          ],
+          "limit": {
+            "context": 100000000,
+            "input": 100000000
+          }
+        },
+        "opencode/flint-40b-free": {
+          "name": "opencode/flint-40b-free",
+          "modelID": "opencode/flint-40b-free",
+          "cost": [
+            {
+              "input": 0,
+              "output": 0,
+              "cache": {
+                "read": 0,
+                "write": 0
+              }
+            }
+          ],
+          "limit": {
+            "context": 100000000,
+            "input": 100000000
+          }
+        },
+        "opencode/gemini-3.5-flash-lite": {
+          "name": "opencode/gemini-3.5-flash-lite",
+          "modelID": "opencode/gemini-3.5-flash-lite",
+          "cost": [
+            {
+              "input": 0,
+              "output": 0,
+              "cache": {
+                "read": 0,
+                "write": 0
+              }
+            }
+          ],
+          "limit": {
+            "context": 100000000,
+            "input": 100000000
+          }
+        },
+        "opencode/gemini-3.8-flash": {
+          "name": "opencode/gemini-3.8-flash",
+          "modelID": "opencode/gemini-3.8-flash",
+          "cost": [
+            {
+              "input": 0,
+              "output": 0,
+              "cache": {
+                "read": 0,
+                "write": 0
+              }
+            }
+          ],
+          "limit": {
+            "context": 100000000,
+            "input": 100000000
+          }
+        },
+        "opencode/gemini-4-argon": {
+          "name": "opencode/gemini-4-argon",
+          "modelID": "opencode/gemini-4-argon",
+          "cost": [
+            {
+              "input": 0,
+              "output": 0,
+              "cache": {
+                "read": 0,
+                "write": 0
+              }
+            }
+          ],
+          "limit": {
+            "context": 100000000,
+            "input": 100000000
+          }
+        },
+        "opencode/gemini-4-carbon": {
+          "name": "opencode/gemini-4-carbon",
+          "modelID": "opencode/gemini-4-carbon",
+          "cost": [
+            {
+              "input": 0,
+              "output": 0,
+              "cache": {
+                "read": 0,
+                "write": 0
+              }
+            }
+          ],
+          "limit": {
+            "context": 100000000,
+            "input": 100000000
+          }
+        },
+        "opencode/gemini-4-hydrogen": {
+          "name": "opencode/gemini-4-hydrogen",
+          "modelID": "opencode/gemini-4-hydrogen",
+          "cost": [
+            {
+              "input": 0,
+              "output": 0,
+              "cache": {
+                "read": 0,
+                "write": 0
+              }
+            }
+          ],
+          "limit": {
+            "context": 100000000,
+            "input": 100000000
+          }
+        },
+        "opencode/gemini-4-neon": {
+          "name": "opencode/gemini-4-neon",
+          "modelID": "opencode/gemini-4-neon",
+          "cost": [
+            {
+              "input": 0,
+              "output": 0,
+              "cache": {
+                "read": 0,
+                "write": 0
+              }
+            }
+          ],
+          "limit": {
+            "context": 100000000,
+            "input": 100000000
+          }
+        },
+        "opencode/glm-5.3": {
+          "name": "opencode/glm-5.3",
+          "modelID": "opencode/glm-5.3",
+          "cost": [
+            {
+              "input": 0,
+              "output": 0,
+              "cache": {
+                "read": 0,
+                "write": 0
+              }
+            }
+          ],
+          "limit": {
+            "context": 100000000,
+            "input": 100000000
+          }
+        },
+        "opencode/glm-5.3-flash": {
+          "name": "opencode/glm-5.3-flash",
+          "modelID": "opencode/glm-5.3-flash",
+          "cost": [
+            {
+              "input": 0,
+              "output": 0,
+              "cache": {
+                "read": 0,
+                "write": 0
+              }
+            }
+          ],
+          "limit": {
+            "context": 100000000,
+            "input": 100000000
+          }
+        },
+        "opencode/gpt-5.3-codex": {
+          "name": "opencode/gpt-5.3-codex",
+          "modelID": "opencode/gpt-5.3-codex",
+          "cost": [
+            {
+              "input": 0,
+              "output": 0,
+              "cache": {
+                "read": 0,
+                "write": 0
+              }
+            }
+          ],
+          "limit": {
+            "context": 100000000,
+            "input": 100000000
+          }
+        },
+        "opencode/gpt-5.3-codex-spark": {
+          "name": "opencode/gpt-5.3-codex-spark",
+          "modelID": "opencode/gpt-5.3-codex-spark",
+          "cost": [
+            {
+              "input": 0,
+              "output": 0,
+              "cache": {
+                "read": 0,
+                "write": 0
+              }
+            }
+          ],
+          "limit": {
+            "context": 100000000,
+            "input": 100000000
+          }
+        },
+        "opencode/gpt-5.4-mini": {
+          "name": "opencode/gpt-5.4-mini",
+          "modelID": "opencode/gpt-5.4-mini",
+          "cost": [
+            {
+              "input": 0,
+              "output": 0,
+              "cache": {
+                "read": 0,
+                "write": 0
+              }
+            }
+          ],
+          "limit": {
+            "context": 100000000,
+            "input": 100000000
+          }
+        },
+        "opencode/gpt-5.4-nano": {
+          "name": "opencode/gpt-5.4-nano",
+          "modelID": "opencode/gpt-5.4-nano",
+          "cost": [
+            {
+              "input": 0,
+              "output": 0,
+              "cache": {
+                "read": 0,
+                "write": 0
+              }
+            }
+          ],
+          "limit": {
+            "context": 100000000,
+            "input": 100000000
+          }
+        },
+        "opencode/gpt-5.5": {
+          "name": "opencode/gpt-5.5",
+          "modelID": "opencode/gpt-5.5",
+          "cost": [
+            {
+              "input": 0,
+              "output": 0,
+              "cache": {
+                "read": 0,
+                "write": 0
+              }
+            }
+          ],
+          "limit": {
+            "context": 100000000,
+            "input": 100000000
+          }
+        },
+        "opencode/gpt-5.5-pro": {
+          "name": "opencode/gpt-5.5-pro",
+          "modelID": "opencode/gpt-5.5-pro",
+          "cost": [
+            {
+              "input": 0,
+              "output": 0,
+              "cache": {
+                "read": 0,
+                "write": 0
+              }
+            }
+          ],
+          "limit": {
+            "context": 100000000,
+            "input": 100000000
+          }
+        },
+        "opencode/gpt-5.6-terra": {
+          "name": "opencode/gpt-5.6-terra",
+          "modelID": "opencode/gpt-5.6-terra",
+          "cost": [
+            {
+              "input": 0,
+              "output": 0,
+              "cache": {
+                "read": 0,
+                "write": 0
+              }
+            }
+          ],
+          "limit": {
+            "context": 100000000,
+            "input": 100000000
+          }
+        },
+        "opencode/gpt-6-astra": {
+          "name": "opencode/gpt-6-astra",
+          "modelID": "opencode/gpt-6-astra",
+          "cost": [
+            {
+              "input": 0,
+              "output": 0,
+              "cache": {
+                "read": 0,
+                "write": 0
+              }
+            }
+          ],
+          "limit": {
+            "context": 100000000,
+            "input": 100000000
+          }
+        },
+        "opencode/gpt-6-luna": {
+          "name": "opencode/gpt-6-luna",
+          "modelID": "opencode/gpt-6-luna",
+          "cost": [
+            {
+              "input": 0,
+              "output": 0,
+              "cache": {
+                "read": 0,
+                "write": 0
+              }
+            }
+          ],
+          "limit": {
+            "context": 100000000,
+            "input": 100000000
+          }
+        },
+        "opencode/gpt-6.1-sol": {
+          "name": "opencode/gpt-6.1-sol",
+          "modelID": "opencode/gpt-6.1-sol",
+          "cost": [
+            {
+              "input": 0,
+              "output": 0,
+              "cache": {
+                "read": 0,
+                "write": 0
+              }
+            }
+          ],
+          "limit": {
+            "context": 100000000,
+            "input": 100000000
+          }
+        },
+        "opencode/gpt-6.2-astra": {
+          "name": "opencode/gpt-6.2-astra",
+          "modelID": "opencode/gpt-6.2-astra",
+          "cost": [
+            {
+              "input": 0,
+              "output": 0,
+              "cache": {
+                "read": 0,
+                "write": 0
+              }
+            }
+          ],
+          "limit": {
+            "context": 100000000,
+            "input": 100000000
+          }
+        },
+        "opencode/gpt-6.2-sol": {
+          "name": "opencode/gpt-6.2-sol",
+          "modelID": "opencode/gpt-6.2-sol",
+          "cost": [
+            {
+              "input": 0,
+              "output": 0,
+              "cache": {
+                "read": 0,
+                "write": 0
+              }
+            }
+          ],
+          "limit": {
+            "context": 100000000,
+            "input": 100000000
+          }
+        },
+        "opencode/grok-4.7": {
+          "name": "opencode/grok-4.7",
+          "modelID": "opencode/grok-4.7",
+          "cost": [
+            {
+              "input": 0,
+              "output": 0,
+              "cache": {
+                "read": 0,
+                "write": 0
+              }
+            }
+          ],
+          "limit": {
+            "context": 100000000,
+            "input": 100000000
+          }
+        },
+        "opencode/grok-build-0.1": {
+          "name": "opencode/grok-build-0.1",
+          "modelID": "opencode/grok-build-0.1",
+          "cost": [
+            {
+              "input": 0,
+              "output": 0,
+              "cache": {
+                "read": 0,
+                "write": 0
+              }
+            }
+          ],
+          "limit": {
+            "context": 100000000,
+            "input": 100000000
+          }
+        },
+        "opencode/hy4-flash-free": {
+          "name": "opencode/hy4-flash-free",
+          "modelID": "opencode/hy4-flash-free",
+          "cost": [
+            {
+              "input": 0,
+              "output": 0,
+              "cache": {
+                "read": 0,
+                "write": 0
+              }
+            }
+          ],
+          "limit": {
+            "context": 100000000,
+            "input": 100000000
+          }
+        },
+        "opencode/iceman-free": {
+          "name": "opencode/iceman-free",
+          "modelID": "opencode/iceman-free",
+          "cost": [
+            {
+              "input": 0,
+              "output": 0,
+              "cache": {
+                "read": 0,
+                "write": 0
+              }
+            }
+          ],
+          "limit": {
+            "context": 100000000,
+            "input": 100000000
+          }
+        },
+        "opencode/kimi-k2.7-code": {
+          "name": "opencode/kimi-k2.7-code",
+          "modelID": "opencode/kimi-k2.7-code",
+          "cost": [
+            {
+              "input": 0,
+              "output": 0,
+              "cache": {
+                "read": 0,
+                "write": 0
+              }
+            }
+          ],
+          "limit": {
+            "context": 100000000,
+            "input": 100000000
+          }
+        },
+        "opencode/kimi-k3": {
+          "name": "opencode/kimi-k3",
+          "modelID": "opencode/kimi-k3",
+          "cost": [
+            {
+              "input": 0,
+              "output": 0,
+              "cache": {
+                "read": 0,
+                "write": 0
+              }
+            }
+          ],
+          "limit": {
+            "context": 100000000,
+            "input": 100000000
+          }
+        },
+        "opencode/longcat-2.5-free": {
+          "name": "opencode/longcat-2.5-free",
+          "modelID": "opencode/longcat-2.5-free",
+          "cost": [
+            {
+              "input": 0,
+              "output": 0,
+              "cache": {
+                "read": 0,
+                "write": 0
+              }
+            }
+          ],
+          "limit": {
+            "context": 100000000,
+            "input": 100000000
+          }
+        },
+        "opencode/mimo-v2.6-flash-free": {
+          "name": "opencode/mimo-v2.6-flash-free",
+          "modelID": "opencode/mimo-v2.6-flash-free",
+          "cost": [
+            {
+              "input": 0,
+              "output": 0,
+              "cache": {
+                "read": 0,
+                "write": 0
+              }
+            }
+          ],
+          "limit": {
+            "context": 100000000,
+            "input": 100000000
+          }
+        },
+        "opencode/minimax-m3": {
+          "name": "opencode/minimax-m3",
+          "modelID": "opencode/minimax-m3",
+          "cost": [
+            {
+              "input": 0,
+              "output": 0,
+              "cache": {
+                "read": 0,
+                "write": 0
+              }
+            }
+          ],
+          "limit": {
+            "context": 100000000,
+            "input": 100000000
+          }
+        },
+        "opencode/mistral-large-4": {
+          "name": "opencode/mistral-large-4",
+          "modelID": "opencode/mistral-large-4",
+          "cost": [
+            {
+              "input": 0,
+              "output": 0,
+              "cache": {
+                "read": 0,
+                "write": 0
+              }
+            }
+          ],
+          "limit": {
+            "context": 100000000,
+            "input": 100000000
+          }
+        },
+        "opencode/muse-ember-1.0": {
+          "name": "opencode/muse-ember-1.0",
+          "modelID": "opencode/muse-ember-1.0",
+          "cost": [
+            {
+              "input": 0,
+              "output": 0,
+              "cache": {
+                "read": 0,
+                "write": 0
+              }
+            }
+          ],
+          "limit": {
+            "context": 100000000,
+            "input": 100000000
+          }
+        },
+        "opencode/muse-wonder-1.0": {
+          "name": "opencode/muse-wonder-1.0",
+          "modelID": "opencode/muse-wonder-1.0",
+          "cost": [
+            {
+              "input": 0,
+              "output": 0,
+              "cache": {
+                "read": 0,
+                "write": 0
+              }
+            }
+          ],
+          "limit": {
+            "context": 100000000,
+            "input": 100000000
+          }
+        },
+        "opencode/nemotron-3.5-lightning-free": {
+          "name": "opencode/nemotron-3.5-lightning-free",
+          "modelID": "opencode/nemotron-3.5-lightning-free",
+          "cost": [
+            {
+              "input": 0,
+              "output": 0,
+              "cache": {
+                "read": 0,
+                "write": 0
+              }
+            }
+          ],
+          "limit": {
+            "context": 100000000,
+            "input": 100000000
+          }
+        },
+        "opencode/nemotron-3.5-super-vl-free": {
+          "name": "opencode/nemotron-3.5-super-vl-free",
+          "modelID": "opencode/nemotron-3.5-super-vl-free",
+          "cost": [
+            {
+              "input": 0,
+              "output": 0,
+              "cache": {
+                "read": 0,
+                "write": 0
+              }
+            }
+          ],
+          "limit": {
+            "context": 100000000,
+            "input": 100000000
+          }
+        },
+        "opencode/qwen3.8-flash": {
+          "name": "opencode/qwen3.8-flash",
+          "modelID": "opencode/qwen3.8-flash",
+          "cost": [
+            {
+              "input": 0,
+              "output": 0,
+              "cache": {
+                "read": 0,
+                "write": 0
+              }
+            }
+          ],
+          "limit": {
+            "context": 100000000,
+            "input": 100000000
+          }
+        },
+        "opencode/tidepool-alpha-free": {
+          "name": "opencode/tidepool-alpha-free",
+          "modelID": "opencode/tidepool-alpha-free",
+          "cost": [
+            {
+              "input": 0,
+              "output": 0,
+              "cache": {
+                "read": 0,
+                "write": 0
+              }
+            }
+          ],
+          "limit": {
+            "context": 100000000,
+            "input": 100000000
+          }
+        }
+      }
+    }
+  }
+}

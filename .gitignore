@@ -1,0 +1,7 @@
+credentials/
+credentials/.env
+.env
+.env.*
+!credentials/.env.example
+__pycache__/
+*.pyc
